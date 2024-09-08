@@ -1,42 +1,41 @@
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
 
-        ArrayList<String> foods = new ArrayList<>();
-        foods.add("Apple");
-        foods.add("Banana");
-        foods.add("Bread");
-        foods.add("Cake");
-        foods.add("Pizza");
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        ArrayList<Integer> arrayList = new ArrayList<>();
 
-        /*
-        To iterate through the collection, use a while loop or an enhanced for loop with
-        the condition of has String [Enhanced For] or hasNext() [While Loop].
-         */
-        for (String food : foods) {
-            System.out.println(food);
+        long startTime;
+        long endTime;
+        long elapsedTime;
+
+        for(int i = 0; i < 10000000; i++) {
+            linkedList.add(i);
+            arrayList.add(i);
         }
 
-        ArrayList<Integer> numbers = new ArrayList<>();
-        numbers.add(1);
-        numbers.add(48);
-        numbers.add(3473);
-        numbers.add(1234);
-        numbers.add(-309);
+        startTime = System.nanoTime();
+        //linkedList.get(0); --LinkedList is Slower.
+        //linkedList.get(500000); -- LinkedList is much Slower.
+        //linkedList.get(999999); -- LinkedList is much Slower.
+        //linkedList.remove(0); -- LinkedList is much Faster.
+        //linkedList.remove(500000); -- LinkedList is Slower.
+        //linkedList.remove(999999); -- LinkedList is Slower.
+        endTime = System.nanoTime();
+        elapsedTime = endTime - startTime;
+        System.out.println("LinkedList:\t" + elapsedTime + " ns");
 
-        Iterator<Integer> it = numbers.iterator();
-
-        while(it.hasNext()) {
-            int i = it.next();
-            if(i > 0) {
-                System.out.println(i);
-            }
-            else if(i < 0) {
-                it.remove();
-            }
-        }
-        System.out.println(numbers);
+        startTime = System.nanoTime();
+        //arrayList.get(0); -- ArrayList is Faster.
+        ///arrayList.get(500000); -- ArrayList is much Faster.
+        //arrayList.get(999999); -- ArrayList is much Faster.
+        //arrayList.remove(0); -- ArrayList is much Slower.
+        //arrayList.remove(500000); -- ArrayList is Faster.
+        //arrayList.remove(999999); -- ArrayList is Faster.
+        endTime = System.nanoTime();
+        elapsedTime = endTime - startTime;
+        System.out.println("ArrayList:\t" + elapsedTime + " ns");
     }
 }
