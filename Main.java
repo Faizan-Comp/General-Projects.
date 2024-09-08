@@ -1,41 +1,41 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
+enum Planet{
+    MERCURY(1, 1282820),
+    VENUS(2, 282828),
+    EARTH(3, 122),
+    MARS(4, 22999),
+    JUPITER(5, 282.2902),
+    SATURN(6, 289282),
+    URANUS(7, 22882),
+    NEPTUNE(8, 77777),
+    PLUTO(9, 99999);
+
+    int number;
+    double age;
+    Planet(int number, double age){
+        this.number = number;
+        this.age = age;
+    }
+}
 
 public class Main {
     public static void main(String[] args) {
 
-        LinkedList<Integer> linkedList = new LinkedList<>();
-        ArrayList<Integer> arrayList = new ArrayList<>();
+        Planet myPlanet = Planet.EARTH;
+        Live(myPlanet);
+    }
 
-        long startTime;
-        long endTime;
-        long elapsedTime;
-
-        for(int i = 0; i < 10000000; i++) {
-            linkedList.add(i);
-            arrayList.add(i);
+    static void Live(Planet myPlanet) {
+        switch(myPlanet) {
+            case EARTH:
+                System.out.println("You can live here.");
+                System.out.println("This is planet number " + myPlanet.number +
+                        " with an age of " + myPlanet.age);
+            break;
+            default:
+                System.out.println("You can't live here.");
+                System.out.println("This is planet number " + myPlanet.number +
+                        " with an age of " + myPlanet.age);
+            break;
         }
-
-        startTime = System.nanoTime();
-        //linkedList.get(0); --LinkedList is Slower.
-        //linkedList.get(500000); -- LinkedList is much Slower.
-        //linkedList.get(999999); -- LinkedList is much Slower.
-        //linkedList.remove(0); -- LinkedList is much Faster.
-        //linkedList.remove(500000); -- LinkedList is Slower.
-        //linkedList.remove(999999); -- LinkedList is Slower.
-        endTime = System.nanoTime();
-        elapsedTime = endTime - startTime;
-        System.out.println("LinkedList:\t" + elapsedTime + " ns");
-
-        startTime = System.nanoTime();
-        //arrayList.get(0); -- ArrayList is Faster.
-        ///arrayList.get(500000); -- ArrayList is much Faster.
-        //arrayList.get(999999); -- ArrayList is much Faster.
-        //arrayList.remove(0); -- ArrayList is much Slower.
-        //arrayList.remove(500000); -- ArrayList is Faster.
-        //arrayList.remove(999999); -- ArrayList is Faster.
-        endTime = System.nanoTime();
-        elapsedTime = endTime - startTime;
-        System.out.println("ArrayList:\t" + elapsedTime + " ns");
     }
 }
