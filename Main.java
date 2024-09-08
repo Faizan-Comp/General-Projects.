@@ -1,11 +1,22 @@
+import java.util.Scanner;
 public class Main {
-    public static void main(String[] args) throws AgeLessThanZeroException {
-        validateAge(-3);
-    }
+    public static void main(String[] args) {
 
-    private static void validateAge (int age) throws AgeLessThanZeroException {
-        if(age < 0) {
-            throw new AgeLessThanZeroException("Age cannot be negative.", new RuntimeException());
+        Animal animal;
+        Scanner s = new Scanner(System.in);
+        System.out.println("Would you like to create a cat object (1) or a Dog object (2)?");
+        int choice = s.nextInt();
+        if (choice == 1) {
+            animal = new Dog();
+            animal.speak();
+        }
+        else if(choice == 2) {
+            animal = new Cat();
+            animal.speak();
+        }
+        else {
+            animal = new Animal();
+            animal.speak();
         }
     }
 }
