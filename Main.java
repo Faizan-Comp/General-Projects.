@@ -1,44 +1,35 @@
-import java.lang.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-        /*
-        The most simple and common type of list, an Array List.
-         */
-         ArrayList<String> people = new ArrayList<String>();
 
-         people.add("John");
-         people.add("Dave");
-         people.add("Jack");
+        String[] names = {"John", "Carl", "Jerry"};
+        try {
+            BufferedWriter wr = new BufferedWriter(new FileWriter("output.txt"));
+            wr.write("Writing to a file");
+            wr.append("\nNice try buddy.");
 
-         people.remove("Dave");
-         people.remove(1);
+            for(String s : names) {
+                wr.write("\n" + s);
+            }
+            wr.close();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
 
-         if (people.contains("John")) {
-             System.out.println("John is in the list.");
-         }
-
-         if (people.isEmpty()) {
-             System.out.println("Nothing is in the list.");
-         }
-
-         people.clear();
-
-         /*
-         Linked list. The difference between it and an array list is that elements are stored as
-         nodes that connect its previous node and the next.
-          */
-
-        LinkedList<Integer> list = new LinkedList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-
-        list.remove(0);
-        list.remove(Integer.valueOf(3));
-        list.clear();
-
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("output.txt"));
+            String line;
+            while((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 }
